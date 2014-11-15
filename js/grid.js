@@ -31,9 +31,6 @@
   /**
    * Class Methods
    */
-  Grid.positionToIndex = function(i, j) {
-    return i + numRows * j;
-  };
 
   /**
    * Instance Methods
@@ -54,8 +51,8 @@
     checkBounds: function(i, j) {
       if (i < 0) return false;
       if (j < 0) return false;
-      if (i >= numRows) return false;
-      if (j >= numColumns) return false;
+      if (i >= this.numRows) return false;
+      if (j >= this.numColumns) return false;
       return true;
     },
     /**
@@ -80,6 +77,47 @@
         y: i * this.tileHeight + this.yOrigin
       };
     },
+
+    positionToIndex: function(i, j) {
+      return i + numRows * j;
+    },
+
+    /**
+     * Apply a post-processing mask. If the mask is positive,
+     * it selects the tile (marks it)
+     * @param {Array} mask a 3x3 mask represented as a 9 index array
+     */
+    postProcess: function(mask) {
+      var newGrid = [];
+      // The iteration doesn't take into account the borders
+      for (var i = 1; i < this.numRows - 1; i++) {
+        for (var j = 1; j < this.numColumns - 1; j++) {
+          // We apply the mask
+          var sum = 0;
+          for (var mi = 0; mi < 3; mi++) {
+            for (var mj = 0; mj < 3; mj++) {
+              sum += mask[mi][mj] * this.grid[i + mi - 1][j + mj - 1].mark;
+            }
+          }
+
+          if (sum > 0) {
+            newGrid.push([i, j]);
+          }
+        }
+      }
+
+      console.log(newGrid);
+      for (var i = 0; i < newGrid.length; i++) {
+        var p = newGrid[i];
+        this.grid[p[0]][p[1]].setMarked();
+      }
+
+      draw();
+      return newGrid;
+    },
+
+
+
     toString: function() {
       var string = '';
       for (var i = 0; i < this.grid.length; i++) {
@@ -96,15 +134,13 @@
       return string;
     },
     updateGrid: function(i, j, visitedArray) {
-      console.log(i, j);
       var tile = this.grid[i][j];
       var neighbours = this.checkNeighbours(tile);
-      this.grid[tile.i][tile.j].color = 'black';
-      this.grid[tile.i][tile.j].colorIndex = -1;
-      visitedArray[Grid.positionToIndex(tile.i, tile.j)] = true;
+      this.grid[tile.i][tile.j].setMarked();
+      visitedArray[this.positionToIndex(tile.i, tile.j)] = true;
       for (var i = 0; i < neighbours.length; i++) {
         if (!visitedArray[
-            Grid.positionToIndex(neighbours[i].i, neighbours[i].j)])
+            this.positionToIndex(neighbours[i].i, neighbours[i].j)])
           this.updateGrid(neighbours[i].i, neighbours[i].j, visitedArray);
       }
     }
