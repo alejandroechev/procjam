@@ -15,8 +15,8 @@
 
   Tile.prototype = {
       draw: function(context) {
-        context.fillStyle = this.color;
-        context.strokeStyle = 'black';
+        context.fillStyle = this.color == 'black' ? '#459633' : '#9dd2f2';
+        context.strokeStyle = this.color == 'black' ? '#459633' : '#9dd2f2';
         context.lineWidth = 1;
         context.fillRect(this.x, this.y, this.tileWidth, this.tileHeight);
         context.strokeRect(this.x, this.y, this.tileWidth, this.tileHeight);

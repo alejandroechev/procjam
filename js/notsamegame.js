@@ -5,11 +5,12 @@ var width, height;
 var grid;
 var tileWidth = 15;
 var tileHeight = 15;
-var numRows = 25;
-var numColumns = 40;
-var numberOfColors = 3;
+var numRows = 125;
+var numColumns = 200;
+var numberOfColors = 2;
 var xOrigin = 0;
 var yOrigin = 0;
+var randomClicks = 100;
 
 var colors = ['#d0e8de', '#cf808b', '#57374d', '#dec4a6', '#999999'];
 
@@ -34,11 +35,22 @@ function load(canvas) {
   update();
 }
 
+function init()
+{
+  for (var i = 0; i < randomClicks; i++) {
+    var indexI = randNumber(numRows-1);
+    var indexJ = randNumber(numColumns-1);
+    var visitedArray = {};
+    grid.updateGrid(indexI, indexJ, visitedArray);
+  };
+}
+
 /**
  * Resets the state of the grid to reflect the new variables
  */
 function update() {
   grid = new Grid(numRows, numColumns, width, height, xOrigin, yOrigin);
+  init();
   exportGridAsText();
   requestAnimationFrame(draw);
 }
