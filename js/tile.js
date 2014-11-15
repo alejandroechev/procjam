@@ -1,6 +1,10 @@
 /**
  * Represents a single tile of the grid
  */
+ var terrainColor = '#459633';
+ var terrainDark = '#197e09';
+ var waterColor = '#9dd2f2';
+ var waveColor = '#254ace';
 (function() {
   function Tile(x, y, i, j, tileWidth, tileHeight, color, colorIndex) {
    this.x = x;
@@ -20,11 +24,35 @@
         this.color, this.colorIndex);
     },
     draw: function(context) {
-      context.fillStyle = this.color == 'black' ? '#459633' : '#9dd2f2';
-      context.strokeStyle = this.color == 'black' ? '#459633' : '#9dd2f2';
       context.lineWidth = 1;
-      context.fillRect(this.x, this.y, this.tileWidth, this.tileHeight);
-      context.strokeRect(this.x, this.y, this.tileWidth, this.tileHeight);
+      if (this.color == 'black')
+      {
+        context.fillStyle = terrainColor;
+        context.strokeStyle = terrainDark;
+
+        context.lineWidth = 2;
+        context.beginPath();
+        context.arc(this.x, this.y, this.tileWidth / 2,
+          Math.PI / 4, 2 * Math.PI);
+        context.stroke();
+        context.fill();
+
+        context.lineWidth = 1;
+        //context.strokeRect(this.x, this.y, this.tileWidth, this.tileHeight);
+        //context.fillRect(this.x, this.y, this.tileWidth, this.tileHeight);
+      }
+      else
+      {
+        context.fillStyle = waterColor;
+        context.strokeStyle = waterColor;
+        context.fillRect(this.x, this.y, this.tileWidth, this.tileHeight);
+        context.strokeRect(this.x, this.y, this.tileWidth, this.tileHeight);
+
+        context.strokeStyle = waveColor;
+        context.beginPath();
+        context.arc(this.x, this.y, this.tileWidth / 2, 0, Math.PI);
+        context.stroke();
+      }
     },
     setMarked: function() {
       if (this.mark === 1) return;

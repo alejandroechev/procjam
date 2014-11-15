@@ -19,6 +19,10 @@
 
     for (var i = 0; i < this.grid.length; i++) {
       for (var j = 0; j < this.grid[i].length; j++) {
+        var randProbability = Math.random();
+        /*var randColorIndex = 0;
+        if(randProbability > 0.55)
+          randColorIndex = 1;*/
         var randColorIndex = Math.floor((Math.random() * numberOfColors));
         var xy = this.getXYforIJ(i, j);
         this.grid[i][j] = new Tile(xy.x, xy.y, i, j,

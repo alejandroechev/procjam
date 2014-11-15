@@ -5,12 +5,12 @@ var width, height;
 var grid;
 var tileWidth = 15;
 var tileHeight = 15;
-var numRows = 125;
+var numRows = 150;
 var numColumns = 200;
 var numberOfColors = 2;
 var xOrigin = 0;
 var yOrigin = 0;
-var randomClicks = 100;
+var randomClicks = 120;
 
 var colors = ['#d0e8de', '#cf808b', '#57374d', '#dec4a6', '#999999'];
 
