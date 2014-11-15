@@ -120,7 +120,7 @@ function onPostProcessClicked(event) {
   }
 
   grid.postProcess(mask);
-
+  exportGridAsText();
 }
 
 function exportGridAsText() {
