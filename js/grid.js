@@ -123,10 +123,10 @@
       for (var i = 0; i < this.grid.length; i++) {
         for (var j = 0; j < this.grid[i].length; j++) {
           if (this.grid[i][j].color == 'black') {
-            string = string + ' ';
+            string = string + '*';
           }
           else {
-            string = string + '*';
+            string = string + '-';
           }
         }
         string = string + '\n';

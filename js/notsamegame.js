@@ -24,8 +24,8 @@ function load(canvas) {
   currentContext = canvas.getContext('2d');
 
   canvas.addEventListener('mousedown', onMouseClicked, false);
-  document.getElementById('colorSlider')
-    .addEventListener('change', onColorSliderChanged, false);
+  document.getElementById('islandSlider')
+    .addEventListener('change', onIslandSliderChanged, false);
   document.getElementById('rowsSlider')
     .addEventListener('change', onRowsSliderChanged, false);
   document.getElementById('columnsSlider')
@@ -93,8 +93,8 @@ function onMouseClicked(event) {
   draw();
 }
 
-function onColorSliderChanged(event) {
-  numberOfColors = Math.floor(event.target.value);
+function onIslandSliderChanged(event) {
+  randomClicks = Math.floor(event.target.value);
 }
 
 function onRowsSliderChanged(event) {
