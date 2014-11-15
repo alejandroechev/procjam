@@ -1,4 +1,3 @@
-
 var currentContext;
 var width, height;
 
@@ -59,6 +58,7 @@ function positionToIndex(i, j) {
 }
 
 function onMouseClicked(event) {
+  console.log('CLICK');
   var pos = getMousePos(event);
   var indexes = getGridIndexesFromMouse(pos);
   var visitedArray = {};
@@ -193,14 +193,14 @@ function load(canvas) {
   currentContext = canvas.getContext('2d');
 
   canvas.addEventListener('mousedown', onMouseClicked, false);
-  document.getElementById('colorSlider').addEventListener('change',
-    onColorSliderChanged, false);
-  document.getElementById('rowsSlider').addEventListener('change',
-    onRowsSliderChanged, false);
-  document.getElementById('columnsSlider').addEventListener('change',
-    onColumnsSliderChanged, false);
-  document.getElementById('updateButton').addEventListener('click',
-    onUpdateClicked, false);
+  document.getElementById('colorSlider')
+    .addEventListener('change', onColorSliderChanged, false);
+  document.getElementById('rowsSlider')
+    .addEventListener('change', onRowsSliderChanged, false);
+  document.getElementById('columnsSlider')
+    .addEventListener('change', onColumnsSliderChanged, false);
+  document.getElementById('updateButton')
+    .addEventListener('click', onUpdateClicked, false);
   update();
 }
 
@@ -230,27 +230,3 @@ function toString(grid) {
   }
   return string;
 }
-
-
-function Tile(x, y, i, j, color, colorIndex) {
-   this.x = x;
-   this.y = y;
-   this.i = i;
-   this.j = j;
-   this.color = color;
-   this.colorIndex = colorIndex;
-}
-
-Tile.prototype = {
-    draw: function(context) {
-      context.fillStyle = this.color;
-      context.strokeStyle = 'black';
-      context.lineWidth = 1;
-      context.fillRect(this.x, this.y, tileWidth, tileHeight);
-      context.strokeRect(this.x, this.y, tileWidth, tileHeight);
-    },
-    clone: function() {
-      return new Tile(this.x, this.y, this.i, this.j,
-        this.color, this.colorIndex);
-    }
-};
