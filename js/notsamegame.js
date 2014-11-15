@@ -32,17 +32,18 @@ function load(canvas) {
     .addEventListener('change', onColumnsSliderChanged, false);
   document.getElementById('updateButton')
     .addEventListener('click', onUpdateClicked, false);
+  document.getElementById('postProcessButton')
+    .addEventListener('click', onPostProcessClicked, false);
   update();
 }
 
-function init()
-{
+function init() {
   for (var i = 0; i < randomClicks; i++) {
-    var indexI = randNumber(numRows-1);
-    var indexJ = randNumber(numColumns-1);
+    var indexI = randNumber(numRows - 1);
+    var indexJ = randNumber(numColumns - 1);
     var visitedArray = {};
     grid.updateGrid(indexI, indexJ, visitedArray);
-  };
+  }
 }
 
 /**
@@ -106,6 +107,20 @@ function onColumnsSliderChanged(event) {
 
 function onUpdateClicked(event) {
   update();
+}
+
+function onPostProcessClicked(event) {
+  var masks = document.getElementsByClassName('mask');
+  var mask = [];
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      mask[i] = mask[i] || [];
+      mask[i][j] = masks[j + 3 * i].checked ? 1 : 0;
+    }
+  }
+
+  grid.postProcess(mask);
+
 }
 
 function exportGridAsText() {

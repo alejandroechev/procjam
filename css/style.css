@@ -41,3 +41,12 @@ textarea{
   width:100%;
   height:250px;
 }
+
+.col-50 {
+  float: left;
+  width: 49%;
+  display: inline-block;
+}
+.clearfix {
+  clear: both;
+}

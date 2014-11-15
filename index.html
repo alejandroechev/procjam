@@ -34,7 +34,7 @@
 				You can modify the number of colors, size of the grid and export the results as text <a href="https://github.com/vreyn/webtoys" target="_blank" >(source code).</a>
 			</p>
 
-			<div >
+			<div class="col-50">
 				<p>
 					<label>Number of colors </label>
 					<br/>
@@ -53,11 +53,35 @@
 				<p>
 					<button id="updateButton">Update</button>
 				</p>
-				<p>
-					<textarea id="textGrid"></textarea>
-				</p>
 			</div>
-
+      <div class="col-50">
+        <p>
+          Post-Processing Mask
+          <br/>
+        </p>
+        <div>
+          <input type="checkbox" name="mask00" class="mask">
+          <input type="checkbox" name="mask01" class="mask">
+          <input type="checkbox" name="mask02" class="mask">
+        </div>
+        <div>
+          <input type="checkbox" name="mask10" class="mask">
+          <input type="checkbox" name="mask11" class="mask">
+          <input type="checkbox" name="mask12" class="mask">
+        </div>
+        <div>
+          <input type="checkbox" name="mask20" class="mask">
+          <input type="checkbox" name="mask21" class="mask">
+          <input type="checkbox" name="mask22" class="mask">
+        </div>
+        <p>
+          <button id="postProcessButton">Post-Process</button>
+        </p>
+      </div>
+      <div class="clearfix"></div>
+      <p>
+        <textarea id="textGrid"></textarea>
+      </p>
 		</div>
 	</div>
 

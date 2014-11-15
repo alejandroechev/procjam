@@ -106,7 +106,6 @@
         }
       }
 
-      console.log(newGrid);
       for (var i = 0; i < newGrid.length; i++) {
         var p = newGrid[i];
         this.grid[p[0]][p[1]].setMarked();
@@ -115,9 +114,6 @@
       draw();
       return newGrid;
     },
-
-
-
     toString: function() {
       var string = '';
       for (var i = 0; i < this.grid.length; i++) {
